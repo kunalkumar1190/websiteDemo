@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Page Animation</title>
+    <style>
+        /* Reset some default styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Set background and full-page height */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+            z-index: -1; /* Send the background behind the content */
+        }
+
+        /* Content style */
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            color: white;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s forwards; /* Animation */
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Heading style */
+        h1 {
+            font-size: 4em;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Paragraph style */
+        p {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+
+        /* Button style */
+        .btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #fff;
+            color: #2575fc;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2575fc;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background -->
+    <div class="background"></div>
+
+    <!-- Content -->
+    <div class="content">
+        <div>
+            <h1>Welcome to the Future</h1>
+            <p>Here's a cool fade-in animation effect on this full-page layout.</p>
+            <button class="btn">Explore More</button>
+        </div>
+    </div>
+
+</body>
+</html>
