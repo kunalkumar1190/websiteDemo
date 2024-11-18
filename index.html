@@ -3,94 +3,433 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Page Animation</title>
+    <title>TEST</title>
     <style>
-        /* Reset some default styles */
-        body, html {
-            margin: 0;
+        * {
             padding: 0;
-            height: 100%;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            box-sizing: border-box;
         }
 
-        /* Set background and full-page height */
-        .background {
+        #main {
+            display: flex;
+            justify-content: space-between;
+            height: 100vh;
+        }
+
+        #buildersection {
+            width: 80%;
+            background-color: whitesmoke;
+            display: flex;
+        }
+
+        #buildersection #propertysection {
+            width: 20%;
+            background-color: gray;
+            padding: 20px;
+        }
+
+        #buildersection #layputsection {
+            width: 80%;
+            background-color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        #codesection {
+            width: 30%;
+            background-color: rgb(212, 209, 209);
+            padding: 20px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: purple;
+            padding: 10px;
+            margin: 10px 0;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background-color: darkviolet;
+        }
+
+        .property-list-container {
+            width: 200px;
+            background-color: lightgray;
+            padding-left: 10px;
+            margin-top: 10px;
+        }
+
+        .property-list-container ul {
+            margin: 0;
+        }
+
+        .property-list-container li {
+            background-color: transparent;
+            color: black;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
             position: fixed;
-            top: 0;
+            z-index: 1;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
-            z-index: -1; /* Send the background behind the content */
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
         }
 
-        /* Content style */
-        .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Full viewport height */
-            color: white;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 2s forwards; /* Animation */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
         }
 
-        /* Animation keyframes */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Heading style */
-        h1 {
-            font-size: 4em;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
-            margin: 0;
         }
 
-        /* Paragraph style */
-        p {
-            font-size: 1.5em;
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .input-container {
             margin-top: 20px;
         }
 
-        /* Button style */
-        .btn {
-            margin-top: 30px;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            background-color: #fff;
-            color: #2575fc;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .input-container label {
+            display: block;
+            margin-bottom: 5px;
         }
 
-        .btn:hover {
-            background-color: #2575fc;
+        .input-container input {
+            display: block;
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .input-container button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: purple;
             color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: darkviolet;
+        }
+
+        .widget {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .child-container {
+            border: 1px solid blue;
+            padding: 10px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .connection-line {
+            position: absolute;
+            background-color: black;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .add-child-button {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: purple;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-child-button:hover {
+            background-color: darkviolet;
         }
     </style>
 </head>
 <body>
-
-    <!-- Background -->
-    <div class="background"></div>
-
-    <!-- Content -->
-    <div class="content">
-        <div>
-            <h1>Welcome to the Future</h1>
-            <p>Here's a cool fade-in animation effect on this full-page layout.</p>
-            <button class="btn">Explore More</button>
+    <div id="main">
+        <div id="buildersection">
+            <div id="propertysection">
+                <ul>
+                    <li id="flutterrow">Row</li>
+                    <li id="fluttercolumn">Column</li>
+                    <li id="fluttercontainer">Container</li>
+                    <li id="fluttertext">Text</li>
+                    <li id="flutterbutton">Button</li>
+                </ul>
+            </div>
+            <div id="layputsection">
+                <!-- Content will be displayed here when a list item is clicked -->
+            </div>
+        </div>
+        <div id="codesection">
+            <h1>Code Build here</h1>
+            <pre id="json-code">JSON data will appear here</pre>
         </div>
     </div>
+
+    <!-- Modal for Input -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Enter Value</h2>
+            <div id="modal-input-container" class="input-container">
+                <!-- Input fields will be dynamically added here -->
+            </div>
+            <button id="submit-btn">OK</button>
+        </div>
+    </div>
+
+    <script>let currentProperties = {};
+        let currentParentElement = null;
+        const items = document.querySelectorAll('#propertysection li');
+        const layoutSection = document.getElementById('layputsection');
+        const propertysection = document.getElementById('propertysection');
+        const modal = document.getElementById('myModal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalInputContainer = document.getElementById('modal-input-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const closeBtn = document.querySelector('.close');
+        const jsonCode = document.getElementById('json-code');
+        
+        // Properties for each Flutter-like element
+        const properties = {
+            'Row': ['children'],
+            'Column': ['children'],
+            'Container': ['height', 'width', 'color', 'child'],
+            'Text': ['text', 'size', 'fontweight'],
+            'Button': ['text', 'onPressed', 'color', 'child']
+        };
+        
+        // Initialize event listeners and modal functionality
+        function initializeFunctionality() {
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const itemName = item.textContent.trim();
+                    propertysection.style.display = "none";
+        
+                    if (properties[itemName]) {
+                        modalInputContainer.innerHTML = '';
+                        currentProperties = {};
+        
+                        // Set modal title
+                        modalTitle.textContent = `Enter values for ${itemName}:`;
+        
+                        properties[itemName].forEach(property => {
+                            if (property === 'children' || property === 'child') {
+                                // Skip adding input field in the modal for 'child' and 'children'
+                            } else {
+                                const { label, input } = createPropertyInput(property);
+                                modalInputContainer.appendChild(label);
+                                modalInputContainer.appendChild(input);
+        
+                                currentProperties[property] = input;
+                            }
+                        });
+        
+                        // Display the modal
+                        modal.style.display = 'block';
+        
+                        // Handle the OK button click
+                        submitBtn.onclick = () => {
+                            if (currentParentElement) {
+                                addChildElement(itemName);
+                                currentParentElement = null;
+                            } else {
+                                addElement(itemName);
+                            }
+                            updateJSON();
+        
+                            // Close the modal
+                            modal.style.display = 'none';
+                        };
+                    } else {
+                        layoutSection.innerHTML += '<p>No properties available</p>';
+                    }
+                });
+            });
+        
+            // Close the modal when the user clicks on <span> (x)
+            closeBtn.onclick = () => {
+                modal.style.display = 'none';
+            };
+        
+            // Close the modal when the user clicks anywhere outside of the modal
+            window.onclick = (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        }
+        
+        // Create input fields for properties
+        function createPropertyInput(property) {
+            const label = document.createElement('label');
+            label.textContent = `Value for ${property}:`;
+        
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = `Enter value for ${property}`;
+        
+            return { label, input };
+        }
+        
+        // Add a new element to the layout
+        function addElement(type) {
+            const newElement = document.createElement('div');
+            newElement.classList.add('widget');
+            newElement.dataset.type = type;
+            newElement.dataset.properties = JSON.stringify(
+                Object.keys(currentProperties).reduce((acc, property) => {
+                    acc[property] = currentProperties[property].value;
+                    return acc;
+                }, {})
+            );
+        
+            newElement.innerHTML = `<h3>${type}</h3>`;
+        
+            // Add button to add child elements if applicable
+            if (type === 'Container' || type === 'Row' || type === 'Column' || type === 'Button') {
+                addAddChildButton(newElement);
+            }
+        
+            layoutSection.appendChild(newElement);
+        }
+        
+        // Add the "Add Child +" button to an element
+        function addAddChildButton(element) {
+            const addChildButton = document.createElement('button');
+            addChildButton.textContent = 'Add Child +';
+            addChildButton.classList.add('add-child-button');
+            addChildButton.onclick = (e) => {
+                e.stopPropagation(); // Prevent event bubbling
+                currentParentElement = element;
+                propertysection.style.display = 'block';
+                modal.style.display = 'none';
+            };
+            element.appendChild(addChildButton);
+        }
+        
+        // Add a new child element to the current parent element
+        function addChildElement(type) {
+            const newChildElement = document.createElement('div');
+            newChildElement.classList.add('child-container');
+            newChildElement.dataset.type = type;
+            newChildElement.dataset.properties = JSON.stringify(
+                Object.keys(currentProperties).reduce((acc, property) => {
+                    acc[property] = currentProperties[property].value;
+                    return acc;
+                }, {})
+            );
+        
+            newChildElement.innerHTML = `<h4>${type}</h4>`;
+        
+            // Append the new child to the current parent element
+            if (currentParentElement) {
+                // Remove the Add Child button from the parent
+                const addChildButton = currentParentElement.querySelector('.add-child-button');
+                if ( type != 'Row' || type !='Column') {
+                    addChildButton.remove();
+                }
+        
+                currentParentElement.appendChild(newChildElement);
+        
+                // Add an "Add Child +" button to the new child if it supports children
+                const childType = newChildElement.dataset.type;
+                if (properties[childType] && (properties[childType].includes('children') || properties[childType].includes('child'))) {
+                    addAddChildButton(newChildElement);
+                }
+        
+                drawConnectionLine(currentParentElement, newChildElement);
+                updateJSON();
+            }
+        }
+        
+        // Draw a line connecting the parent element to the child element
+        function drawConnectionLine(parent, child) {
+            const parentRect = parent.getBoundingClientRect();
+            const childRect = child.getBoundingClientRect();
+        
+            let line = parent.querySelector('.connection-line');
+            if (!line) {
+                line = document.createElement('div');
+                line.classList.add('connection-line');
+                parent.appendChild(line);
+            }
+        
+            const x1 = parentRect.left + parentRect.width / 2;
+            const y1 = parentRect.top + parentRect.height;
+            const x2 = childRect.left + childRect.width / 2;
+            const y2 = childRect.top;
+        
+            const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+            const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        
+            line.style.width = `${length}px`;
+            line.style.transform = `rotate(${angle}deg)`;
+            line.style.transformOrigin = '0 0';
+            line.style.top = `${y1}px`;
+            line.style.left = `${x1}px`;
+        }
+        
+        // Update JSON data based on the current layout
+        function updateJSON() {
+            function getElementData(element) {
+                const type = element.dataset.type;
+                const properties = JSON.parse(element.dataset.properties || '{}');
+                const children = Array.from(element.querySelectorAll('.child-container')).map(getElementData);
+                if (type === 'Container' || type === 'Row' || type === 'Column') {
+                    properties.children = children.length ? children : undefined;
+                } else if (type === 'Button') {
+                    properties.child = children.length ? children[0] : undefined;
+                }
+                return { [type]: properties };
+            }
+        
+            const jsonData = Array.from(layoutSection.children).map(getElementData);
+            jsonCode.textContent = JSON.stringify(jsonData, null, 2);
+        }
+        
+        // Initialize functionality on page load
+        initializeFunctionality();
+        </script>
 
 </body>
 </html>
